@@ -1,10 +1,9 @@
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader');
-const HtmlWebpackPlugn = require('html-webpack-plugin');
+var webpack = require('webpack');
+var HtmlWebpackPlugn = require('html-webpack-plugin');
+var { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
   mode: 'development',
-  target: 'node',
   entry: [
     './src/app.js'
   ],
@@ -30,8 +29,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugn({
       filename: 'index.html',
       template: 'index.html',

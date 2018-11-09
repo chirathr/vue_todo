@@ -13,3 +13,9 @@ npm install
 ```bash
 npm run build
 ```
+
+### Run the dev server
+
+```bash
+npm run dev
+```

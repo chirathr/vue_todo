@@ -1,11 +1,15 @@
 import './css/style.css'
 
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from 'vue/dist/vue';
+import Hello from './components/hello';
 
-new Vue({
+
+var vm = new Vue({
     el: '#app',
-    render: function(h) {
-        return h(App);
+    data: {
+        message: "Hello World!"
+    },
+    components: {
+        'hello': Hello
     }
 });
