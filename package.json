@@ -9,15 +9,18 @@
   },
   "devDependencies": {
     "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config build/webpack.config.dev.js"
+    "build": "webpack --config build/webpack.config.dev.js",
+    "dev": "webpack-dev-server --config build/webpack.config.dev.js"
   },
   "keywords": [
     "ToDo",
