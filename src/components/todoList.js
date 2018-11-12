@@ -6,9 +6,11 @@ var todoList = {
         'todo-item': todoItem
     },
     template: `
-        <div class="col-12">
+        <div class="col-12 list-group list-group-flush pr-0">
+            <hr />
             <todo-item v-for="(todo, index) in todos" v-bind:key="index" v-bind:index="index" v-bind:todo="todo" v-on:remove="removeTodo">
             </todo-item>
+            <hr />
         </div>`,
     methods: {
         removeTodo: function (index) {

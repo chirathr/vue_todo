@@ -1,3 +1,4 @@
+import './css/bootstrap.css';
 import './css/style.css';
 
 import Vue from 'vue/dist/vue';

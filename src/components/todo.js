@@ -3,13 +3,17 @@ import todoList from './todoList';
 
 var Todo = {
     template: `
-        <div class="row">
-            <h1 class="col-md-12">Todo</h1>
-            <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
-            <div class="col-md-12">
-                <input v-model="text" v-on:keyup.enter="addTodo" />
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h2 class="card-title">Todo</h2>
+                <div class="mt-2">
+                    <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
+                </div>
             </div>
-            {{ text }}
         </div>
     `,
     data: function () {
