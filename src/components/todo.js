@@ -3,16 +3,20 @@ import todoList from './todoList';
 
 var Todo = {
     template: `
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 30rem;">
             <div class="card-body">
                 <h2 class="card-title">Todo</h2>
-                <div class="mt-2">
-                    <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
+                
+                <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
+                
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
+               
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" v-on:click="addTodo">Add</button>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
-                </div>
             </div>
         </div>
     `,
@@ -33,6 +37,7 @@ var Todo = {
     },
     methods: {
         addTodo: function () {
+            if (!this.text) return;
             this.todos.push({
                 text: this.text,
                 checked: false

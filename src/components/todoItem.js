@@ -1,8 +1,8 @@
 var todoList = {
     props: ['todo', 'index'],
     template: `
-        <div class="row list-group-item ">
-            <div class="col-10 pl-0">
+        <div class="row list-group-item pr-0" v-bind:class="{disabled: todo.checked}">
+            <div class="pl-0">
                 <div class="checkbox float-left">
                     <label>
                         <input type="checkbox" v-model="todo.checked">
@@ -14,8 +14,8 @@ var todoList = {
                 </div>
             </div>
                 
-            <div class="float-right col-2 mr-0">
-                <button v-on:click="$emit('remove', index)">X</button>
+            <div class="float-right mr-3">
+                <button class="btn btn-sm btn-outline-danger mr-0" v-on:click="$emit('remove', index)">X</button>
             </div>
         </div>`
 }
