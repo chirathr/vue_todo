@@ -6,6 +6,9 @@ var Todo = {
         <div class="card" style="width: 30rem;">
             <div class="card-body">
                 <h2 class="card-title">Todo</h2>
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading">
+                <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
+
                 
                 <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
                 
@@ -24,12 +27,14 @@ var Todo = {
         return {
             todos: [{
                 text: "Get fruits!",
-                checked: false
+                checked: true
             }, {
                 text: "Buy bread",
-                checked: true
+                checked: false
             }],
-            text: ''
+            text: '',
+            heading: 'Shopping',
+            editHeading: false
         };
     },
     components: {
@@ -43,12 +48,17 @@ var Todo = {
                 checked: false
             });
             this.text = '';
-            console.log(this.todos);
         },
         removeTodo: function (index) {
-            if (index > -1) {
+            if (index > -1 || index < this.todos.size) {
                 this.todos.splice(index, 1);
             }
+        },
+        saveHeading: function () {
+            this.editHeading = false;
+        },
+        showEditHeading: function () {
+            this.editHeading = true;
         }
     }
 }

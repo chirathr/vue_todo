@@ -1,6 +1,6 @@
 var todoList = {
-    props: ['todo', 'index'],
-    template: `
+  props: ["todo", "index"],
+  template: `
         <div class="row list-group-item pr-0" v-bind:class="{disabled: todo.checked}">
             <div class="pl-0">
                 <div class="checkbox float-left">
@@ -18,6 +18,6 @@ var todoList = {
                 <button class="btn btn-sm btn-outline-danger mr-0" v-on:click="$emit('remove', index)">X</button>
             </div>
         </div>`
-}
+};
 
 export default todoList;
