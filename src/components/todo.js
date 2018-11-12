@@ -10,7 +10,7 @@ var Todo = {
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
                 
-                <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" class="col-md-12"></todo-list>
+                <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" class="col-md-12"></todo-list>
                 
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
@@ -50,7 +50,7 @@ var Todo = {
             this.text = '';
         },
         removeTodo: function (index) {
-            if (index > -1 || index < this.todos.size) {
+            if (index > -1 && index < this.todos.length) {
                 this.todos.splice(index, 1);
             }
         },
@@ -59,6 +59,11 @@ var Todo = {
         },
         showEditHeading: function () {
             this.editHeading = true;
+        },
+        saveTodoText: function (index, text) {
+            if ((index > -1 && index < this.todos.length)) {
+                this.todos[index].text = text;
+            }
         }
     }
 }
