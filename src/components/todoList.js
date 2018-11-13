@@ -5,6 +5,12 @@ var todoList = {
     components: {
         'todo-item': todoItem
     },
+    data: function () {
+        return {
+            ALL: 2,
+            FINISHED: 3
+        };
+    },
     template: `
         <div class="col-12 list-group list-group-flush pr-0 color-complete-transparent">
             <hr />
@@ -27,10 +33,10 @@ var todoList = {
     },
     computed: {
         showAll: function () {
-            return this.state === 2;
+            return this.state === this.ALL;
         },
         showFinished: function () {
-            return this.state === 3;
+            return this.state === this.FINISHED;
         }
     }
 }
