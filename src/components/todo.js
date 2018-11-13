@@ -12,17 +12,19 @@ var Todo = {
                     <button type="button" v-on:click="state = 2" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showAll }">All</button>
                     <button type="button" v-on:click="state = 3" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showFinished }">Finished</button>
                 </div>
+
                 <h2 class="card-title">Todo</h2>
                 
-                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus placeholder="Heading" class="form-control form-control-sm color-transparent form-heading">
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus placeholder="Heading" 
+                class="form-control form-control-sm color-transparent form-heading">
+
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
                 <todo-list v-bind:todos="todos" v-bind:state="state" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" 
-                    v-bind:edit="editTodos" class="col-md-12" v-on:enableEditTodos="enableEditTodos"></todo-list>
+                    v-bind:edit="editTodos" class="col-md-12" v-on:enableEditTodos="enableEditTodos" v-bind:class="backgroundColorClass"></todo-list>
                 
                 <div class="input-group">
                     <input type="text" class="form-control color-transparent" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
-               
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" v-on:click="addTodo">Add</button>
                     </div>
@@ -34,7 +36,6 @@ var Todo = {
                     <button class="btn btn-sm color-selector-green color-selector" v-on:click="changeColor('green')"></button> 
                     <button class="btn btn-sm color-selector-blue color-selector" v-on:click="changeColor('blue')"></button> 
                     <button class="btn btn-sm color-selector-white color-selector mr-3" v-on:click="changeColor('white')"></button> 
-
                     <button class="btn btn-outline-danger btn-sm" type="button" v-on:click="$emit('delete-todo', todoId)">Delete</button> 
                 </div>
                 
@@ -42,6 +43,7 @@ var Todo = {
         </div>
     </div>
     `,
+    props: ['todoId'],
     data: function () {
         return {
             todos: [],
@@ -49,20 +51,22 @@ var Todo = {
             heading: '',
             editHeading: true,
             editTodos: false,
+            TODO: 1,
+            ALL: 2,
+            FINISHED: 3,
             state: 2,
             backgroundColorClass: ''
         };
     },
-    props: ['todoId'],
     computed: {
         showAll: function () {
-            return this.state === 2;
+            return this.state === this.ALL;
         },
         showFinished: function () {
-            return this.state === 3;
+            return this.state === this.FINISHED;
         },
         showTodo: function () {
-            return this.state === 1;
+            return this.state === this.TODO;
         },
     },
     components: {
@@ -89,12 +93,11 @@ var Todo = {
             this.editHeading = true;
         },
         saveTodoText: function (index, text) {
-            if ((index > -1 && index < this.todos.length)) {
+            if (text && (index > -1 && index < this.todos.length)) {
                 this.todos[index].text = text;
             }
         },
         disableEdit: function (event) {
-            console.log(event.target.tagName);
             if (this.editHeading && event.target.name != 'heading' && this.heading) {
                 this.saveHeading();
             }
@@ -103,7 +106,6 @@ var Todo = {
         },
         enableEditTodos: function () {
             this.editTodos = true;
-            console.log('enableEditTodos');
         },
         changeColor: function(color) {
             switch(color) {

@@ -17,9 +17,6 @@ var vm = new Vue({
         count: 1
     },
     methods: {
-        saveAllInputs: function () {
-
-        },
         addTodo: function () {
             this.todoList.push(++this.count);
         },
@@ -27,7 +24,6 @@ var vm = new Vue({
             var index = this.todoList.indexOf(todoId);
             if (index > -1)
                 this.todoList.splice(index, 1);
-            console.log(this.todoList);
         }
     }
 });

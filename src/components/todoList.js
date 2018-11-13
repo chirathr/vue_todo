@@ -6,10 +6,11 @@ var todoList = {
         'todo-item': todoItem
     },
     template: `
-        <div class="col-12 list-group list-group-flush pr-0">
+        <div class="col-12 list-group list-group-flush pr-0 color-complete-transparent">
             <hr />
+
             <todo-item v-for="(todo, index) in todos" v-if="showAll || (showFinished === todo.checked)" v-bind:key="index" v-bind:index="index" 
-            v-bind:todo="todo" v-on:remove="removeTodo" v-on:saveTodoText="saveTodoText" v-on:enableEditTodos="enableEditTodos" v-bind:edit="edit">
+                v-bind:todo="todo" v-on:remove="removeTodo" v-on:saveTodoText="saveTodoText" v-on:enableEditTodos="enableEditTodos" v-bind:edit="edit">
             </todo-item>
             <hr />
         </div>`,

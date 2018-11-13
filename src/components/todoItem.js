@@ -10,7 +10,7 @@ var todoList = {
         }
     },
     template: `
-        <div class="row list-group-item pr-0" v-bind:class="{disabled: todo.checked}">
+        <div class="row list-group-item pr-0 color-complete-transparent" v-bind:class="{disabled: todo.checked}">
             <div class="pl-0">
                 <div class="checkbox float-left">
                     <label>
@@ -20,12 +20,9 @@ var todoList = {
 
                 <div class="float-left pl-2" v-bind:class="{\'strike-through\': todo.checked}">
                     <input v-model="todo.text" v-if="editText" v-on:keyup.enter="saveEditedText">
-
                     <p v-else v-on:click="editTodo">
                         {{ todo.text }}
                     </p>
-                    
-                
                 </div>
             </div>
                 

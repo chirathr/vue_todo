@@ -47,6 +47,10 @@
     background-color: #fbfbfb73; 
 }
 
+.color-complete-transparent, .color-complete-transparent.disabled  {
+    background-color: #ffffff00;
+}
+
 .form-heading {
     width: 50%;
 }
