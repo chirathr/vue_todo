@@ -1,8 +1,4 @@
-import {
-    throws
-} from "assert";
-
-var todoList = {
+var todoItem = {
     props: ["todo", "index", "edit"],
     data: function () {
         return {
@@ -13,12 +9,11 @@ var todoList = {
         <div class="row list-group-item pr-0 color-complete-transparent" v-bind:class="{disabled: todo.checked}">
             <div class="pl-0">
                 <div class="checkbox float-left">
-                    <label>
-                        <input type="checkbox" v-model="todo.checked">
-                    </label>
+                    <i class="material-icons text-success" v-on:click="todo.checked = !todo.checked" v-if="todo.checked">check_box</i>
+                    <i class="material-icons muted" v-on:click="todo.checked = !todo.checked" v-else>check_box_outline_blank</i>
                 </div>
 
-                <div class="float-left pl-2" v-bind:class="{\'strike-through\': todo.checked}">
+                <div class="float-left pl-3" v-bind:class="{'strike-through': todo.checked}">
                     <input v-model="todo.text" v-if="editText" v-on:keyup.enter="saveEditedText">
                     <p v-else v-on:click="editTodo">
                         {{ todo.text }}
@@ -27,7 +22,7 @@ var todoList = {
             </div>
                 
             <div class="float-right mr-3">
-                <button class="btn btn-sm btn-outline-danger mr-0" v-on:click="$emit('remove', index)">X</button>
+                <i class="material-icons" v-on:click="$emit('remove', index)">delete</i>
             </div>
         </div>`,
     methods: {
@@ -38,7 +33,6 @@ var todoList = {
         editTodo: function () {
             this.editText = !this.editText;
             this.$emit('enableEditTodos');
-            console.log(this.edit);
         }
     },
     watch: {
@@ -46,9 +40,8 @@ var todoList = {
             if (!newVal) {
                 this.editText = false;
             }
-            console.log("edit changes", newVal);
         }
     }
 };
 
-export default todoList;
+export default todoItem;
