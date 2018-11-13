@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugn = require('html-webpack-plugin');
-var { VueLoaderPlugin } = require('vue-loader');
+var {
+  VueLoaderPlugin
+} = require('vue-loader');
 
 module.exports = {
   mode: 'development',
@@ -14,8 +16,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
         use: 'vue-loader'
       },
@@ -25,6 +26,16 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8000, // Convert images < 8kb to base64 strings
+            name: 'img/[hash]-[name].[ext]'
+          }
+        }]
       }
     ]
   },
