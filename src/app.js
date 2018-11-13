@@ -9,5 +9,10 @@ var vm = new Vue({
     el: '#app',
     components: {
         'todo': Todo
+    },
+    methods: {
+        saveAllInputs: function () {
+
+        }
     }
 });

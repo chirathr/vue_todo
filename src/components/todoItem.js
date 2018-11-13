@@ -1,8 +1,12 @@
+import {
+    throws
+} from "assert";
+
 var todoList = {
-    props: ["todo", "index"],
+    props: ["todo", "index", "edit"],
     data: function () {
         return {
-            edit: false
+            editText: false
         }
     },
     template: `
@@ -15,9 +19,9 @@ var todoList = {
                 </div>
 
                 <div class="float-left pl-2" v-bind:class="{\'strike-through\': todo.checked}">
-                    <input v-model="todo.text" v-if="edit" v-on:keyup.enter="saveEditedText">
+                    <input v-model="todo.text" v-if="editText" v-on:keyup.enter="saveEditedText">
 
-                    <p v-else v-on:click="edit = !edit">
+                    <p v-else v-on:click="editTodo">
                         {{ todo.text }}
                     </p>
                     
@@ -31,8 +35,21 @@ var todoList = {
         </div>`,
     methods: {
         saveEditedText: function () {
-            this.edit = !this.edit;
+            this.editText = !this.editText;
             this.$emit('saveTodoText', this.index, this.todo.text);
+        },
+        editTodo: function () {
+            this.editText = !this.editText;
+            this.$emit('enableEditTodos');
+            console.log(this.edit);
+        }
+    },
+    watch: {
+        edit: function (newVal, oldVal) {
+            if (!newVal) {
+                this.editText = false;
+            }
+            console.log("edit changes", newVal);
         }
     }
 };

@@ -3,14 +3,21 @@ import todoList from './todoList';
 
 var Todo = {
     template: `
-        <div class="card" style="width: 30rem;">
+        <div class="card" style="width: 30rem;" v-on:click.capture="disableEdit">
+            
             <div class="card-body">
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <button type="button" v-on:click="state = 1" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showTodo }">Todo</button>
+                    <button type="button" v-on:click="state = 2" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showAll }">All</button>
+                    <button type="button" v-on:click="state = 3" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showFinished }">Finished</button>
+                </div>
                 <h2 class="card-title">Todo</h2>
-                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading">
+                
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading">
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
-                
-                <todo-list v-bind:todos="todos" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" class="col-md-12"></todo-list>
+                <todo-list v-bind:todos="todos" v-bind:state="state" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" 
+                    v-bind:edit="editTodos" class="col-md-12" v-on:enableEditTodos="enableEditTodos"></todo-list>
                 
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
@@ -34,8 +41,21 @@ var Todo = {
             }],
             text: '',
             heading: 'Shopping',
-            editHeading: false
+            editHeading: false,
+            editTodos: false,
+            state: 2
         };
+    },
+    computed: {
+        showAll: function () {
+            return this.state === 2;
+        },
+        showFinished: function () {
+            return this.state === 3;
+        },
+        showTodo: function () {
+            return this.state === 1;
+        },
     },
     components: {
         'todo-list': todoList
@@ -64,6 +84,18 @@ var Todo = {
             if ((index > -1 && index < this.todos.length)) {
                 this.todos[index].text = text;
             }
+        },
+        disableEdit: function (event) {
+            console.log(event.target.tagName)
+            if (this.editHeading && event.target.name != 'heading') {
+                this.saveHeading();
+            }
+            if (event.target.tagName !== 'INPUT')
+                this.editTodos = false;
+        },
+        enableEditTodos: function () {
+            this.editTodos = true;
+            console.log('enableEditTodos');
         }
     }
 }
