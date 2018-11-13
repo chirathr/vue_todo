@@ -7,11 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Todo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <div id="app" class="container m-5">
-    <todo v-for="id in todoList"></todo>
+  <div id="app" class="container pt-5">
+    <div class="row">
+      <todo v-for="id in todoList" v-bind:key="id" v-bind:todo-id="id" v-on:delete-todo="deleteTodo"></todo>
+      <todo-template v-on:add-todo="addTodo"></todo-template>
+    </div>
   </div>
 
   <!-- Optional JavaScript -->
@@ -22,6 +26,9 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>

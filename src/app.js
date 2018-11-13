@@ -3,12 +3,14 @@ import './css/style.css';
 
 import Vue from 'vue/dist/vue';
 import Todo from './components/todo';
+import TodoTemplate from './components/todoTemplate';
 
 
 var vm = new Vue({
     el: '#app',
     components: {
-        'todo': Todo
+        'todo': Todo,
+        'todo-template': TodoTemplate
     },
     data: {
         todoList: [1],
@@ -18,8 +20,14 @@ var vm = new Vue({
         saveAllInputs: function () {
 
         },
-        addTodoList: function () {
-            todoList.append(++count);
+        addTodo: function () {
+            this.todoList.push(++this.count);
+        },
+        deleteTodo: function (todoId) {
+            var index = this.todoList.indexOf(todoId);
+            if (index > -1)
+                this.todoList.splice(index, 1);
+            console.log(this.todoList);
         }
     }
 });

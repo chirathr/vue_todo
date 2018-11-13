@@ -3,32 +3,44 @@ import todoList from './todoList';
 
 var Todo = {
     template: `
-        <div class="card" style="width: 30rem;" v-on:click.capture="disableEdit">
+    <div class="col-md-6">
+        <div class="card mt-4" v-bind:class="backgroundColorClass" v-on:click.capture="disableEdit">
             
             <div class="card-body">
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                <div class="btn-group float-right" role="group">
                     <button type="button" v-on:click="state = 1" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showTodo }">Todo</button>
                     <button type="button" v-on:click="state = 2" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showAll }">All</button>
                     <button type="button" v-on:click="state = 3" class="btn btn-outline-secondary btn-sm" v-bind:class="{ active: showFinished }">Finished</button>
                 </div>
                 <h2 class="card-title">Todo</h2>
                 
-                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus placeholder="Heading">
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus placeholder="Heading" class="form-control form-control-sm color-transparent form-heading">
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
                 <todo-list v-bind:todos="todos" v-bind:state="state" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" 
                     v-bind:edit="editTodos" class="col-md-12" v-on:enableEditTodos="enableEditTodos"></todo-list>
                 
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
+                    <input type="text" class="form-control color-transparent" placeholder="New todo" v-model="text" v-on:keyup.enter="addTodo">
                
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" v-on:click="addTodo">Add</button>
                     </div>
                 </div>
+
+                <div class="mt-3 float-right" role="group">
+                    <button class="btn btn-sm color-selector-red color-selector" v-on:click="changeColor('red')"></button> 
+                    <button class="btn btn-sm color-selector-yellow color-selector" v-on:click="changeColor('yellow')"></button> 
+                    <button class="btn btn-sm color-selector-green color-selector" v-on:click="changeColor('green')"></button> 
+                    <button class="btn btn-sm color-selector-blue color-selector" v-on:click="changeColor('blue')"></button> 
+                    <button class="btn btn-sm color-selector-white color-selector mr-3" v-on:click="changeColor('white')"></button> 
+
+                    <button class="btn btn-outline-danger btn-sm" type="button" v-on:click="$emit('delete-todo', todoId)">Delete</button> 
+                </div>
                 
             </div>
         </div>
+    </div>
     `,
     data: function () {
         return {
@@ -37,9 +49,11 @@ var Todo = {
             heading: '',
             editHeading: true,
             editTodos: false,
-            state: 2
+            state: 2,
+            backgroundColorClass: ''
         };
     },
+    props: ['todoId'],
     computed: {
         showAll: function () {
             return this.state === 2;
@@ -80,7 +94,7 @@ var Todo = {
             }
         },
         disableEdit: function (event) {
-            console.log(event.target.tagName)
+            console.log(event.target.tagName);
             if (this.editHeading && event.target.name != 'heading' && this.heading) {
                 this.saveHeading();
             }
@@ -90,6 +104,25 @@ var Todo = {
         enableEditTodos: function () {
             this.editTodos = true;
             console.log('enableEditTodos');
+        },
+        changeColor: function(color) {
+            switch(color) {
+                case 'red': 
+                    this.backgroundColorClass = 'color-selector-red';
+                    break;
+                case 'yellow': 
+                    this.backgroundColorClass = 'color-selector-yellow';
+                    break;
+                case 'blue': 
+                    this.backgroundColorClass = 'color-selector-blue';
+                    break;
+                case 'green': 
+                    this.backgroundColorClass = 'color-selector-green';
+                    break;
+                case 'white': 
+                    this.backgroundColorClass = '';
+                    break;
+            }
         }
     },
     directives: {
