@@ -13,7 +13,7 @@ var Todo = {
                 </div>
                 <h2 class="card-title">Todo</h2>
                 
-                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading">
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus>
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
                 <todo-list v-bind:todos="todos" v-bind:state="state" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" 
@@ -32,16 +32,10 @@ var Todo = {
     `,
     data: function () {
         return {
-            todos: [{
-                text: "Get fruits!",
-                checked: true
-            }, {
-                text: "Buy bread",
-                checked: false
-            }],
+            todos: [],
             text: '',
-            heading: 'Shopping',
-            editHeading: false,
+            heading: '',
+            editHeading: true,
             editTodos: false,
             state: 2
         };
@@ -96,6 +90,13 @@ var Todo = {
         enableEditTodos: function () {
             this.editTodos = true;
             console.log('enableEditTodos');
+        }
+    },
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus();
+            }
         }
     }
 }

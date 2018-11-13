@@ -10,9 +10,16 @@ var vm = new Vue({
     components: {
         'todo': Todo
     },
+    data: {
+        todoList: [1],
+        count: 1
+    },
     methods: {
         saveAllInputs: function () {
 
+        },
+        addTodoList: function () {
+            todoList.append(++count);
         }
     }
 });
