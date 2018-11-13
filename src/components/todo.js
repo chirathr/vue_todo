@@ -13,7 +13,7 @@ var Todo = {
                 </div>
                 <h2 class="card-title">Todo</h2>
                 
-                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus>
+                <input v-if="editHeading" v-on:keydown.enter="saveHeading" v-model="heading" name="heading" v-focus placeholder="Heading">
                 <h6 v-else class="text-muted" v-on:click="showEditHeading">{{ heading }}</h6>
 
                 <todo-list v-bind:todos="todos" v-bind:state="state" v-on:removeTodo="removeTodo" v-on:saveTodoText="saveTodoText" 
@@ -81,7 +81,7 @@ var Todo = {
         },
         disableEdit: function (event) {
             console.log(event.target.tagName)
-            if (this.editHeading && event.target.name != 'heading') {
+            if (this.editHeading && event.target.name != 'heading' && this.heading) {
                 this.saveHeading();
             }
             if (event.target.tagName !== 'INPUT')
