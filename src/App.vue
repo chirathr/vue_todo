@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Todo from "./components/todo";
-import TodoTemplate from "./components/todoTemplate";
+import Todo from "./components/Todo.vue";
+import TodoTemplate from "./components/NewTodoPlaceholder.vue";
 
 export default {
   components: {
