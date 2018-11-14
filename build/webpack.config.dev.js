@@ -7,7 +7,7 @@ var {
 module.exports = {
   mode: 'development',
   entry: [
-    './src/main.js'
+    './src/main.ts'
   ],
   devServer: {
     hot: true,
@@ -19,6 +19,14 @@ module.exports = {
     rules: [{
         test: /\.vue$/,
         use: 'vue-loader'
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.css$/,
@@ -38,6 +46,12 @@ module.exports = {
         }]
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   plugins: [
     new VueLoaderPlugin(),
