@@ -3,7 +3,6 @@
         "target": "es5",
         "module": "es2015",
         "strict": true,
-        "importHelpers": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "baseUrl": ".",
@@ -15,12 +14,6 @@
                 "src/*"
             ]
         },
-        "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable",
-            "scripthost"
-        ]
     },
     "include": [
         "src/**/*.ts",
