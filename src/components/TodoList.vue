@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import todoItem from "./todoItem";
+import todoItem from "./TodoItem.vue";
 
 export default {
   props: ["todos", "edit", "state"],
@@ -37,16 +37,16 @@ export default {
     enableEditTodos: function() {
       this.$emit("enableEditTodos");
     },
-    showTodo: function(todo)  {
-      switch(this.state) {
+    showTodo: function(todo) {
+      switch (this.state) {
         case this.TODO: // Unchecked items
           return todo.checked === false;
-        case this.ALL:  // All items
+        case this.ALL: // All items
           return true;
-        case this.FINISHED:   // Checked items
+        case this.FINISHED: // Checked items
           return todo.checked === true;
       }
     }
-  },
+  }
 };
 </script>
