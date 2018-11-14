@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import todoList from "./todoList";
+import todoList from "./TodoList.vue";
 
 export default {
   props: ["todoId"],
