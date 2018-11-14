@@ -40,14 +40,17 @@
     </div>
 </template>
 
-<script>
-import todoList from "./TodoList.vue";
+<script lang="ts">
+import Vue from 'vue';
+import TodoList from "./TodoList.vue";
+import { ITodoItem } from '../interfaces/todo';
 
-export default {
+export default Vue.extend({
   props: ["todoId"],
   data: function() {
+      let todos: ITodoItem[] = [];
     return {
-      todos: [],
+      todos: todos,
       text: "",
       heading: "",
       editHeading: true,
@@ -60,21 +63,21 @@ export default {
     };
   },
   computed: {
-    showAll: function() {
+    showAll: function(): boolean {
       return this.state === this.ALL;
     },
-    showFinished: function() {
+    showFinished: function(): boolean {
       return this.state === this.FINISHED;
     },
-    showTodo: function() {
+    showTodo: function(): boolean {
       return this.state === this.TODO;
     }
   },
   components: {
-    "todo-list": todoList
+    "todo-list": TodoList
   },
   methods: {
-    addTodo: function() {
+    addTodo: function(): void {
       if (!this.text) return;
       this.todos.push({
         text: this.text,
@@ -82,32 +85,32 @@ export default {
       });
       this.text = "";
     },
-    removeTodo: function(index) {
+    removeTodo: function(index: number): void {
       if (index > -1 && index < this.todos.length) {
         this.todos.splice(index, 1);
       }
     },
-    saveHeading: function() {
+    saveHeading: function(): void {
       this.editHeading = false;
     },
-    showEditHeading: function() {
+    showEditHeading: function(): void {
       this.editHeading = true;
     },
-    saveTodoText: function(index, text) {
+    saveTodoText: function(index: number, text: string): void {
       if (text && (index > -1 && index < this.todos.length)) {
         this.todos[index].text = text;
       }
     },
-    disableEdit: function(event) {
+    disableEdit: function(event: any): void {
       if (this.editHeading && event.target.name != "heading" && this.heading) {
         this.saveHeading();
       }
       if (event.target.tagName !== "INPUT") this.editTodos = false;
     },
-    enableEditTodos: function() {
+    enableEditTodos: function(): void {
       this.editTodos = true;
     },
-    changeColor: function(color) {
+    changeColor: function(color: string): void {
       switch (color) {
         case "red":
           this.backgroundColorClass = "color-selector-red";
@@ -129,11 +132,10 @@ export default {
   },
   directives: {
     focus: {
-      inserted: function(el) {
+      inserted: function(el: any) {
         el.focus();
       }
     }
   }
-};
+});
 </script>
-

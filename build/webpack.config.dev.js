@@ -16,10 +16,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
-        test: /\.vue$/,
-        use: 'vue-loader'
-      },
+    rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
@@ -27,6 +24,10 @@ module.exports = {
         options: {
           appendTsSuffixTo: [/\.vue$/],
         }
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
       },
       {
         test: /\.css$/,

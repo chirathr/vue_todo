@@ -7,11 +7,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import Todo from "./components/Todo.vue";
 import TodoTemplate from "./components/NewTodoPlaceholder.vue";
 
-export default {
+export default Vue.extend({
   components: {
     todo: Todo,
     "todo-template": TodoTemplate
@@ -23,15 +24,16 @@ export default {
     };
   },
   methods: {
-    addTodo: function() {
+    addTodo: function(): void {
       this.todoList.push(++this.count);
     },
-    deleteTodo: function(todoId) {
+    deleteTodo: function(todoId: number): void {
       var index = this.todoList.indexOf(todoId);
       if (index > -1) this.todoList.splice(index, 1);
     }
   }
-};
+});
+
 </script>
 
 <style src="./static/css/style.css"></style>

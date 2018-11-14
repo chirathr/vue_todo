@@ -1,13 +1,13 @@
-import "./static/css/bootstrap.css";
-import "./static/css/style.css";
+import './static/css/bootstrap.css';
+import './static/css/style.css';
 
-import Vue from "vue";
-import App from "./App.vue";
+import Vue from 'vue';
+import App from './App.vue';
 
-new Vue({
-  el: "#app",
+let vm = new Vue({
+  el: '#app',
   components: {
-    App: App
-  },
-  template: "<App />"
+      App,
+    },
+  template: '<App />',
 });

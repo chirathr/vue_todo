@@ -12,13 +12,15 @@
         </div>
 </template>
 
-<script>
-import todoItem from "./TodoItem.vue";
+<script lang="ts">
+import Vue from 'vue';
+import TodoItem from "./TodoItem.vue";
+import { ITodoItem } from '../interfaces/todo';
 
-export default {
+export default Vue.extend({
   props: ["todos", "edit", "state"],
   components: {
-    "todo-item": todoItem
+    "todo-item": TodoItem
   },
   data: function() {
     return {
@@ -28,16 +30,16 @@ export default {
     };
   },
   methods: {
-    removeTodo: function(index) {
+    removeTodo: function(index: number) {
       this.$emit("removeTodo", index);
     },
-    saveTodoText: function(index, text) {
+    saveTodoText: function(index: number, text: string) {
       this.$emit("saveTodoText", index, text);
     },
     enableEditTodos: function() {
       this.$emit("enableEditTodos");
     },
-    showTodo: function(todo) {
+    showTodo: function(todo: ITodoItem) {
       switch (this.state) {
         case this.TODO: // Unchecked items
           return todo.checked === false;
@@ -48,5 +50,5 @@ export default {
       }
     }
   }
-};
+});
 </script>

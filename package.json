@@ -4,6 +4,8 @@
   "description": "Todo app",
   "main": "./src/app.js",
   "dependencies": {
+    "vue": "^2.5.17",
+    "vue-class-component": "^6.0.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -18,7 +20,6 @@
     "ts-loader": "^5.3.0",
     "typescript": "^3.1.6",
     "url-loader": "^1.1.2",
-    "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",

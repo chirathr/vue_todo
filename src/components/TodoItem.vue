@@ -21,8 +21,10 @@
 </template>
 
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   props: ["todo", "index", "edit"],
   data: function() {
     return {
@@ -52,5 +54,5 @@ export default {
       }
     }
   }
-};
+});
 </script>
