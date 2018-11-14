@@ -1,5 +1,5 @@
-import './css/bootstrap.css';
-import './css/style.css';
+import './static/css/bootstrap.css';
+import './static/css/style.css';
 
 import Vue from 'vue/dist/vue';
 import App from './App.vue';
