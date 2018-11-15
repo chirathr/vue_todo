@@ -2,16 +2,14 @@
 
 A simple todo app using Vue.js.
 
+![Todo](screenshots/homepage.png)
+
 ### Installation
+
+Node and npm is required to build this project.
 
 ```bash
 npm install
-```
-
-### Build the app
-
-```bash
-npm run build
 ```
 
 ### Run the dev server
@@ -19,3 +17,5 @@ npm run build
 ```bash
 npm run dev
 ```
+
+This will create a dev server with auto reload.
