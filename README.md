@@ -1,6 +1,6 @@
 ## VueJS-Todo
 
-A simple todo app using Vue.js. [Demo](https://chirathr.github.io/vue-todo/)
+A simple todo app using Vue.js. [Demo](https://chirathr.github.io/vue_todo/)
 
 ![Todo](screenshots/homepage.png)
 
